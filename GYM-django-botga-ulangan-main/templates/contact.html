@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+  <section class="contact_section ">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 px-0">
+          <div class="img-box">
+            <img src="{% static 'images/contact-img.jpg' %}" alt="">
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-6">
+          <div class="form_container pr-0 pr-lg-5 mr-0 mr-lg-2">
+            <div class="heading_container">
+              <h2>
+                Contact Us
+              </h2>
+            </div>
+            <form id="contact-form" action="{% url 'cantact-page' %}" method="POST">
+              {% csrf_token %}
+              {{form.as_p}}
+              <div class="d-flex">
+                <button type="submit">
+                  Send
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success message will appear here -->
+  <div class="container mt-3" id="success-message" style="display: none; background-color: #f90904; color: #10e113; padding: 10px;">
+    <p>Xabaringiz devdasga yuborildi u esa uyquda uyqudan turgandan so'ng kursa qabul qiladi unda ham yoqsa 😇</p>
+  </div>
+  <!-- End success message -->
+
+  <!-- info section -->
+  <section class="info_section layout_padding2">3
+    <div class="container">
+      <div class="info_items">
+        <!-- Your info items here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- end info_section -->
+
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var contactForm = document.getElementById('contact-form');
+      var successMessage = document.getElementById('success-message');
+  
+      contactForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        // Perform any form validation here if needed
+  
+        // Assuming form submission is successful
+        contactForm.style.display = 'none'; // Hide the form
+        successMessage.style.display = 'block'; // Show the success message
+  
+        // Redirect to the home page after 3 seconds
+        setTimeout(function () {
+          window.location.href = "{% url 'home-page' %}"; // Replace 'home-page' with your actual home page URL
+        }, 3000); // 3000 milliseconds = 3 seconds
+      });
+    });
+  </script>
+  
+
+
+{% endblock content %}
+
